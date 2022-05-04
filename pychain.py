@@ -1,8 +1,5 @@
 # PyChain Ledger
 ################################################################################
-# You’ll make the following updates to the provided Python file for this
-# Challenge, which already contains the basic `PyChain` ledger structure that
-# you created throughout the module:
 
 # Step 1: Create a Record Data Class
 # * Create a new data class named `Record`. This class will serve as the
@@ -51,24 +48,22 @@ import hashlib
 # @TODO
 # Create a Record Data Class that consists of the `sender`, `receiver`, and
 # `amount` attributes
-# YOUR CODE HERE
+@dataclass
+class Record:
+    sender: str
+    receiver: str
+    amount: float
 
 
 ################################################################################
 # Step 2:
-# Modify the Existing Block Data Class to Store Record Data
+# Create Block Class and Store Record Data
 
 # Rename the `data` attribute in your `Block` class to `record`, and then set
 # it to use an instance of the new `Record` class that you created in the
 # previous section. To do so, complete the following steps:
 # 1. In the `Block` class, rename the `data` attribute to `record`.
 # 2. Set the data type of the `record` attribute to `Record`.
-
-@dataclass
-class Record:
-    sender: str
-    receiver: str
-    amount: float
     
 @dataclass
 class Block:
@@ -175,9 +170,9 @@ pychain = setup()
 
 sender = st.text_input("sender")
 
-reciever = st.text_input("receiver")
+receiver = st.text_input("receiver")
 
-amount = st.number_input(0)
+amount = st.number_input('Insert a number')
 
 if st.button("Add Block"):
     prev_block = pychain.chain[-1]
@@ -188,7 +183,7 @@ if st.button("Add Block"):
     # which is set equal to a `Record` that contains the `sender`, `receiver`,
     # and `amount` values
     new_block = Block(
-        data=Record(sender= sender,),
+        record=Record(sender=sender, receiver=receiver, amount=amount),
         creator_id=42,
         prev_hash=prev_block_hash
     )
